@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "eslint": "^7.32.0",
+    "htmlhint": "^0.15.1"
+  }
+}
