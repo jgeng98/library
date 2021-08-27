@@ -13,5 +13,79 @@
     <script src="script.js" defer></script>
   </head>
 
-  <body></body>
+  <body>
+    <header>
+      <h1>Library</h1>
+    </header>
+
+    <main>
+      <form id="add-book-form">
+        <div class="input-group">
+          <label id="name" for="name">Book</label>
+          <br />
+          <input
+            type="text"
+            class="form-field"
+            name="name"
+            id="book-name"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label id="author" for="author">Author</label>
+          <br />
+          <input
+            type="text"
+            class="form-field"
+            name="author"
+            id="book-author"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label id="page-num" for="page-num">Number of Pages</label>
+          <br />
+          <input
+            type="text"
+            class="form-field"
+            name="page-num"
+            id="book-pages"
+            required
+          />
+        </div>
+
+        <div class="input">
+          <label id="status" for="status">Status</label>
+          <br />
+          <select class="form-field" name="status" id="book-status">
+            <option value="Read" selected>Read</option>
+            <option value="Not read">Not read</option>
+          </select>
+        </div>
+      </form>
+
+      <table id="bookcase">
+        <tbody id="bookcase-header">
+          <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Number of Pages</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </tbody>
+
+        <tbody id="books"></tbody>
+      </table>
+    </main>
+
+    <footer>
+      <p>
+        Designed by
+        <a target="_blank" href="https://github.com/jgeng98">jgeng98</a>
+      </p>
+    </footer>
+  </body>
 </html>
