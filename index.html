@@ -56,7 +56,7 @@
           />
         </div>
 
-        <div class="input">
+        <div class="input-group">
           <label id="status" for="status">Status</label>
           <br />
           <select class="form-field" name="status" id="book-status">
@@ -64,10 +64,14 @@
             <option value="Not read">Not read</option>
           </select>
         </div>
+
+        <div id="submit">
+          <button>Submit</button>
+        </div>
       </form>
 
       <table id="bookcase">
-        <tbody id="bookcase-header">
+        <thead id="bookcase-header">
           <tr>
             <th>Name</th>
             <th>Author</th>
@@ -75,7 +79,7 @@
             <th>Status</th>
             <th></th>
           </tr>
-        </tbody>
+        </thead>
 
         <tbody id="books"></tbody>
       </table>
