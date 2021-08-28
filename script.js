@@ -42,6 +42,7 @@ function displayBook(book) {
   let author = row.insertCell(1);
   let numPages = row.insertCell(2);
   let status = row.insertCell(3);
+  let deleteBook = row.insertCell(4);
 
   // change the content of the cells to correspond with the newly added book
   title.textContent = book.title;
@@ -49,6 +50,8 @@ function displayBook(book) {
   numPages.textContent = book.numPages;
   // for the status, create a button that can be changed when clicked
   status.appendChild(createStatusButton(book.status));
+  // add a delete button for the row
+  deleteBook.appendChild(createDeleteButton());
 }
 
 function clearForm() {
@@ -68,6 +71,7 @@ function createStatusButton(status) {
     changeBookStatus(e.currentTarget);
   });
 
+  // return the button
   return statusButton;
 }
 
@@ -81,6 +85,20 @@ function changeBookStatus(statusButton) {
   } else {
     statusButton.textContent = "In progress";
   }
+}
+
+function createDeleteButton() {
+  // creates the delete button for the row
+  let deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+
+  // add an event listener to delete the row on click
+  deleteButton.addEventListener("click", (e) => {
+    books.deleteRow(e.currentTarget.parentElement.parentElement.rowIndex - 1);
+  });
+
+  // return the button
+  return deleteButton;
 }
 
 // event listeners
