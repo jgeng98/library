@@ -37,7 +37,7 @@ header {
   font-size: 1.1rem;
   border-radius: 10px;
   border: 1px solid #85a5bb;
-  width: 120px;
+  width: 150px;
   padding: 8px;
   color: #1a2633;
   background-color: #85a5bb;
@@ -101,6 +101,18 @@ main {
   text-align: left;
   word-wrap: break-word;
   padding: 5px 10px 5px 5px;
+}
+
+#bookcase button {
+  font-family: "Poppins", "Open Sans", sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #e0b2bd;
+  font-size: 16px;
+  color: #1a2633;
+  background-color: #e0b2bd;
+  cursor: pointer;
+  width: 110px;
 }
 
 footer {
