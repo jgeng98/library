@@ -47,7 +47,8 @@ function displayBook(book) {
   title.textContent = book.title;
   author.textContent = book.author;
   numPages.textContent = book.numPages;
-  status.textContent = book.status;
+  // for the status, create a button that can be changed when clicked
+  status.appendChild(createStatusButton(book.status));
 }
 
 function clearForm() {
@@ -55,6 +56,31 @@ function clearForm() {
   bookTitle.value = "";
   bookAuthor.value = "";
   bookNumPages.value = "";
+}
+
+function createStatusButton(status) {
+  // creates the button for the status of the book and sets the text content to be "read", "in progress", or "not read"
+  let statusButton = document.createElement("button");
+  statusButton.textContent = status;
+
+  // add an event listener to change the status on click
+  statusButton.addEventListener("click", (e) => {
+    changeBookStatus(e.currentTarget);
+  });
+
+  return statusButton;
+}
+
+function changeBookStatus(statusButton) {
+  // changes the status of the book
+  // not read -> in progress -> read
+  if (statusButton.textContent === "Read") {
+    statusButton.textContent = "Not read";
+  } else if (statusButton.textContent === "In progress") {
+    statusButton.textContent = "Read";
+  } else {
+    statusButton.textContent = "In progress";
+  }
 }
 
 // event listeners
