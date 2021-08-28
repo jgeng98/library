@@ -45,19 +45,18 @@ header {
 
 #submit {
   padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: flex-end;
 }
 
 #submit button {
   font-family: "Poppins", "Open Sans", sans-serif;
   padding: 8px;
   border-radius: 10px;
-  border: 1px solid #85a5bb;
+  border: 1px solid #e0b2bd;
   font-size: 1.1em;
   color: #1a2633;
-  background-color: #85a5bb;
+  background-color: #e0b2bd;
+  cursor: pointer;
 }
 
 #add-book-form input {
@@ -109,4 +108,5 @@ footer a {
   border-radius: 20px;
   padding: 10px;
   color: #e0b2bd;
+  font-weight: bold;
 }
