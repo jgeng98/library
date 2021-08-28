@@ -19,7 +19,28 @@ function Book(title, author, numPages, status) {
 }
 
 // library functionality
+function checkDuplicates(book) {
+  // checks every book in the library to see if one already exists with the same title, author, and number of pages
+  // if one exists, return true to indicate that a duplicate exists
+  for (let bookInLibrary of library) {
+    if (
+      book.title === bookInLibrary.title &&
+      book.author === bookInLibrary.author &&
+      book.numPages === bookInLibrary.numPages
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function addBookToLibrary() {
+  // TODO form currently submits even when required field isn't filled in - fix and get rid of the below if statement
+  // TODO disallow negative page numbers
+  if (bookTitle.value === "") {
+    return;
+  }
+
   // create a new book with the form values
   let newBook = new Book(
     bookTitle.value,
@@ -29,8 +50,12 @@ function addBookToLibrary() {
   );
 
   // add it to the library and display it in the "bookcase"
-  library.push(newBook);
-  displayBook(newBook);
+  if (!checkDuplicates(newBook)) {
+    library.push(newBook);
+    displayBook(newBook);
+  } else {
+    return;
+  }
 }
 
 function displayBook(book) {
