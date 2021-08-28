@@ -10,7 +10,6 @@ const books = document.querySelector("#books");
 let library = [];
 
 // book constructor
-
 function Book(title, author, numPages, status) {
   this.title = title;
   this.author = author;
@@ -47,6 +46,16 @@ function findBookIndex(book) {
   return bookIndex;
 }
 
+function formatPageNumber(number) {
+  // if the number of pages wasn't entered, return nothing
+  if (number === "") {
+    return "";
+  }
+
+  // else return the number without any leading zeros
+  return parseInt(number, 10);
+}
+
 function addBookToLibrary() {
   // TODO form currently submits even when required field isn't filled in - fix and get rid of the below if statement
   if (bookTitle.value === "") {
@@ -57,7 +66,7 @@ function addBookToLibrary() {
   let newBook = new Book(
     bookTitle.value,
     bookAuthor.value,
-    parseInt(bookNumPages.value, 10),
+    formatPageNumber(bookNumPages.value),
     bookStatus.value
   );
 
