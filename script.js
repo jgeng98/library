@@ -36,7 +36,6 @@ function checkDuplicates(book) {
 
 function addBookToLibrary() {
   // TODO form currently submits even when required field isn't filled in - fix and get rid of the below if statement
-  // TODO disallow negative page numbers
   if (bookTitle.value === "") {
     return;
   }
@@ -45,7 +44,7 @@ function addBookToLibrary() {
   let newBook = new Book(
     bookTitle.value,
     bookAuthor.value,
-    bookNumPages.value,
+    parseInt(bookNumPages.value, 10),
     bookStatus.value
   );
 
