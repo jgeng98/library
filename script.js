@@ -7,9 +7,7 @@ const submit = document.querySelector("#submit button");
 const books = document.querySelector("#books");
 
 // variables
-let library = [
-  { title: "Nudge", author: "Richard Thaler", numPages: 100, status: "Read" },
-];
+let library = [];
 
 // book constructor
 
@@ -22,6 +20,7 @@ function Book(title, author, numPages, status) {
 
 // library functionality
 function addBookToLibrary() {
+  // create a new book with the form values
   let newBook = new Book(
     bookTitle.value,
     bookAuthor.value,
@@ -29,17 +28,22 @@ function addBookToLibrary() {
     bookStatus.value
   );
 
+  // add it to the library and display it in the "bookcase"
   library.push(newBook);
   displayBook(newBook);
 }
 
 function displayBook(book) {
+  // create a new row
   let row = books.insertRow(-1);
+
+  // create cells in the row
   let title = row.insertCell(0);
   let author = row.insertCell(1);
   let numPages = row.insertCell(2);
   let status = row.insertCell(3);
 
+  // change the content of the cells to correspond with the newly added book
   title.textContent = book.title;
   author.textContent = book.author;
   numPages.textContent = book.numPages;
@@ -47,6 +51,7 @@ function displayBook(book) {
 }
 
 function clearForm() {
+  // clears the form
   bookTitle.value = "";
   bookAuthor.value = "";
   bookNumPages.value = "";
