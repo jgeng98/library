@@ -7,7 +7,7 @@ let form = document.querySelector("#add-book-form");
 const books = document.querySelector("#books");
 
 // variables
-let library = [];
+let library = getLibraryFromLocalStorage();
 
 // book constructor
 function Book(title, author, numPages, status) {
@@ -65,13 +65,17 @@ function addBookToLibrary() {
     bookStatus.value
   );
 
-  // add it to the library and display it in the "bookcase"
+  // if there are no duplicates, add it to the library and display it in the "bookcase"
+  // otherwise, display an alert notifying the user of the duplicate
   if (!checkDuplicates(newBook)) {
     library.push(newBook);
     displayBook(newBook);
   } else {
-    return;
+    alert("This book is already in your library.");
   }
+
+  // update the library in the local storage
+  addToLocalStorage();
 }
 
 function displayBook(book) {
@@ -132,6 +136,9 @@ function changeBookStatus(statusButton, book) {
     statusButton.textContent = "In progress";
     library[bookIndex].status = "In progress";
   }
+
+  // update the library in the local storage
+  addToLocalStorage();
 }
 
 function createDeleteButton(book) {
@@ -150,8 +157,33 @@ function createDeleteButton(book) {
     books.deleteRow(e.currentTarget.parentElement.parentElement.rowIndex - 1);
   });
 
+  // update the library in the local storage
+  addToLocalStorage();
+
   // return the button
   return deleteButton;
+}
+
+function addToLocalStorage() {
+  // add the current library to local storage
+  localStorage.setItem("library", JSON.stringify(library));
+}
+
+function getLibraryFromLocalStorage() {
+  // return the existing library in local storage, if it exists
+  // otherwise, return an empty list to signify an empty library
+  if (localStorage.getItem("library")) {
+    return JSON.parse(localStorage.getItem("library"));
+  } else {
+    return [];
+  }
+}
+
+function displayBooksFromLocalStorage() {
+  // displays all the books from local storage whenever the page gets refreshed
+  for (book of library) {
+    displayBook(book);
+  }
 }
 
 // event listeners
@@ -160,3 +192,5 @@ form.addEventListener("submit", (e) => {
   addBookToLibrary();
   clearForm();
 });
+
+displayBooksFromLocalStorage();
