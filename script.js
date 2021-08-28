@@ -3,7 +3,7 @@ let bookTitle = document.querySelector("#book-title");
 let bookAuthor = document.querySelector("#book-author");
 let bookNumPages = document.querySelector("#book-pages");
 let bookStatus = document.querySelector("#book-status");
-const submit = document.querySelector("#submit button");
+let form = document.querySelector("#add-book-form");
 const books = document.querySelector("#books");
 
 // variables
@@ -57,11 +57,6 @@ function formatPageNumber(number) {
 }
 
 function addBookToLibrary() {
-  // TODO form currently submits even when required field isn't filled in - fix and get rid of the below if statement
-  if (bookTitle.value === "") {
-    return;
-  }
-
   // create a new book with the form values
   let newBook = new Book(
     bookTitle.value,
@@ -160,7 +155,7 @@ function createDeleteButton(book) {
 }
 
 // event listeners
-submit.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   addBookToLibrary();
   clearForm();
