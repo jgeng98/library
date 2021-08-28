@@ -133,3 +133,46 @@ footer a {
   color: #e0b2bd;
   font-weight: bold;
 }
+
+@media screen and (max-width: 980px) {
+  header {
+    padding: 10px;
+  }
+
+  #add-book-form {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  #add-book-form input,
+  #book-status {
+    width: 60%;
+  }
+
+  #submit {
+    align-self: auto;
+  }
+
+  #bookcase {
+    font-size: 1em;
+  }
+
+  #bookcase button {
+    width: 60px;
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  #bookcase td {
+    padding: 0;
+  }
+}
