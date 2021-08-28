@@ -49,9 +49,9 @@ function displayBook(book) {
   author.textContent = book.author;
   numPages.textContent = book.numPages;
   // for the status, create a button that can be changed when clicked
-  status.appendChild(createStatusButton(book.status));
+  status.appendChild(createStatusButton(book));
   // add a delete button for the row
-  deleteBook.appendChild(createDeleteButton());
+  deleteBook.appendChild(createDeleteButton(book));
 }
 
 function clearForm() {
@@ -61,39 +61,59 @@ function clearForm() {
   bookNumPages.value = "";
 }
 
-function createStatusButton(status) {
+function createStatusButton(book) {
   // creates the button for the status of the book and sets the text content to be "read", "in progress", or "not read"
   let statusButton = document.createElement("button");
-  statusButton.textContent = status;
+  statusButton.textContent = book.status;
 
   // add an event listener to change the status on click
   statusButton.addEventListener("click", (e) => {
-    changeBookStatus(e.currentTarget);
+    changeBookStatus(e.currentTarget, book);
   });
 
   // return the button
   return statusButton;
 }
 
-function changeBookStatus(statusButton) {
-  // changes the status of the book
+function changeBookStatus(statusButton, book) {
+  // finds the index of the book whose status just changed
+  let bookIndex = library.findIndex(function (bookToCheck) {
+    return (
+      bookToCheck.title === book.title && bookToCheck.author === book.author
+    );
+  });
+
+  // changes the status of the book on the display and in the library array
   // not read -> in progress -> read
   if (statusButton.textContent === "Read") {
     statusButton.textContent = "Not read";
+    library[bookIndex].status = "Not read";
   } else if (statusButton.textContent === "In progress") {
     statusButton.textContent = "Read";
+    library[bookIndex].status = "Read";
   } else {
     statusButton.textContent = "In progress";
+    library[bookIndex].status = "In progress";
   }
 }
 
-function createDeleteButton() {
+function createDeleteButton(book) {
+  // finds the index of the book that was just deleted
+  let bookIndex = library.findIndex(function (bookToCheck) {
+    return (
+      bookToCheck.title === book.title && bookToCheck.author === book.author
+    );
+  });
+
   // creates the delete button for the row
   let deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
 
   // add an event listener to delete the row on click
   deleteButton.addEventListener("click", (e) => {
+    // deletes the book from the library using the previously found index
+    library.splice(bookIndex, 1);
+    // deletes the book from the display
     books.deleteRow(e.currentTarget.parentElement.parentElement.rowIndex - 1);
   });
 
