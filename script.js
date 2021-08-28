@@ -34,6 +34,19 @@ function checkDuplicates(book) {
   return false;
 }
 
+function findBookIndex(book) {
+  // finds the index of a given book in the library
+  let bookIndex = library.findIndex(function (bookToCheck) {
+    return (
+      bookToCheck.title === book.title &&
+      bookToCheck.author === book.author &&
+      bookToCheck.numPages === book.numPages
+    );
+  });
+
+  return bookIndex;
+}
+
 function addBookToLibrary() {
   // TODO form currently submits even when required field isn't filled in - fix and get rid of the below if statement
   if (bookTitle.value === "") {
@@ -101,11 +114,7 @@ function createStatusButton(book) {
 
 function changeBookStatus(statusButton, book) {
   // finds the index of the book whose status just changed
-  let bookIndex = library.findIndex(function (bookToCheck) {
-    return (
-      bookToCheck.title === book.title && bookToCheck.author === book.author
-    );
-  });
+  let bookIndex = findBookIndex(book);
 
   // changes the status of the book on the display and in the library array
   // not read -> in progress -> read
@@ -123,11 +132,7 @@ function changeBookStatus(statusButton, book) {
 
 function createDeleteButton(book) {
   // finds the index of the book that was just deleted
-  let bookIndex = library.findIndex(function (bookToCheck) {
-    return (
-      bookToCheck.title === book.title && bookToCheck.author === book.author
-    );
-  });
+  let bookIndex = findBookIndex(book);
 
   // creates the delete button for the row
   let deleteButton = document.createElement("button");
