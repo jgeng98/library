@@ -46,6 +46,7 @@ header {
 #submit {
   padding: 30px;
   align-self: flex-end;
+  width: 145px;
 }
 
 #submit button {
@@ -113,6 +114,11 @@ main {
   background-color: #e0b2bd;
   cursor: pointer;
   width: 110px;
+}
+
+#bookcase button:hover,
+#submit button:hover {
+  font-weight: bold;
 }
 
 footer {
