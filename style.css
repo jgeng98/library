@@ -98,6 +98,14 @@ main {
   border-bottom: 1px solid #1a2633;
 }
 
+#bookcase-header th i {
+  cursor: pointer;
+}
+
+#bookcase-header th i:hover {
+  transform: scale(1.2);
+}
+
 #books td {
   text-align: left;
   word-wrap: break-word;
