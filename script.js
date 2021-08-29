@@ -8,6 +8,7 @@ const books = document.querySelector("#books");
 const titleSort = document.querySelector("#title-sort");
 const authorSort = document.querySelector("#author-sort");
 const pageSort = document.querySelector("#pages-sort");
+const statusSort = document.querySelector("#status-sort");
 
 // variables
 let library = getLibraryFromLocalStorage();
@@ -238,7 +239,7 @@ form.addEventListener("submit", (e) => {
 
 titleSort.addEventListener("click", (e) => {
   // if the titles are currently sorted in ascending order, change the icon and sort by descending order
-  // otherwise, sort the titles in ascending order
+  // otherwise, sort the titles by ascending order
   // unsorted -> ascending order -> descending order
   if (e.currentTarget.className.includes("fa-sort-alpha-up")) {
     resetSortIcons();
@@ -257,7 +258,7 @@ titleSort.addEventListener("click", (e) => {
 
 authorSort.addEventListener("click", (e) => {
   // if the authors are currently sorted in ascending order, change the icon and sort by descending order
-  // otherwise, sort the authors in ascending order
+  // otherwise, sort the authors by ascending order
   // unsorted -> ascending order -> descending order
   if (e.currentTarget.className.includes("fa-sort-alpha-up")) {
     resetSortIcons();
@@ -276,7 +277,7 @@ authorSort.addEventListener("click", (e) => {
 
 pageSort.addEventListener("click", (e) => {
   // if the number of pages are currently sorted in ascending order, change the icon and sort by descending order
-  // otherwise, sort the number of pages in ascending order
+  // otherwise, sort the number of pages by ascending order
   // unsorted -> ascending order -> descending order
   if (e.currentTarget.className.includes("fa-sort-numeric-up")) {
     resetSortIcons();
@@ -290,6 +291,25 @@ pageSort.addEventListener("click", (e) => {
     e.currentTarget.classList.remove("fa-sort");
     e.currentTarget.classList.add("fa-sort-numeric-up");
     sortAscendingByProperty("numPages");
+  }
+});
+
+statusSort.addEventListener("click", (e) => {
+  // if the status of the books are currently sorted in ascending order, change the icon and sort by descending order
+  // otherwise, sort the status by ascending order
+  // unsorted -> ascending order -> descending order
+  if (e.currentTarget.className.includes("fa-sort-alpha-up")) {
+    resetSortIcons();
+
+    e.currentTarget.classList.remove("fa-sort-alpha-up");
+    e.currentTarget.classList.add("fa-sort-alpha-down");
+    sortDescendingByProperty("status");
+  } else {
+    resetSortIcons();
+
+    e.currentTarget.classList.remove("fa-sort");
+    e.currentTarget.classList.add("fa-sort-alpha-up");
+    sortAscendingByProperty("status");
   }
 });
 
