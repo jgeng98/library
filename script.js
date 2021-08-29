@@ -188,21 +188,42 @@ function displayBooksFromLocalStorage() {
 }
 
 function sortAscendingByProperty(property) {
-  // let sortedLibrary = JSON.parse(JSON.stringify(library));
+  // sorts the library in ascending order by the given property
   library.sort((a, b) => (a[property] > b[property] ? 1 : -1));
 
+  // clears the table
   books.textContent = "";
 
+  // displays the library in ascending order
   for (book of library) {
     displayBook(book);
   }
 
+  // updates the library in local storage
+  addToLocalStorage();
+}
+
+function sortDescendingByProperty(property) {
+  // sorts the library in descending order by the given property
+  library.sort((a, b) => (a[property] < b[property] ? 1 : -1));
+
+  // clears the table
+  books.textContent = "";
+
+  // displays the library in descending order
+  for (book of library) {
+    displayBook(book);
+  }
+
+  // updates the library in local storage
   addToLocalStorage();
 }
 
 function resetSortIcons() {
+  // selects all the sort icons
   let sortIcons = document.querySelectorAll(".fas");
 
+  // sets them to the generic sort icon (not showing ascending or descending)
   sortIcons.forEach((icon) => {
     icon.setAttribute("class", "fas fa-sort");
   });
@@ -216,27 +237,60 @@ form.addEventListener("submit", (e) => {
 });
 
 titleSort.addEventListener("click", (e) => {
-  resetSortIcons();
+  // if the titles are currently sorted in ascending order, change the icon and sort by descending order
+  // otherwise, sort the titles in ascending order
+  // unsorted -> ascending order -> descending order
+  if (e.currentTarget.className.includes("fa-sort-alpha-up")) {
+    resetSortIcons();
 
-  e.currentTarget.classList.remove("fa-sort");
-  e.currentTarget.classList.add("fa-sort-alpha-up");
-  sortAscendingByProperty("title");
+    e.currentTarget.classList.remove("fa-sort-alpha-up");
+    e.currentTarget.classList.add("fa-sort-alpha-down");
+    sortDescendingByProperty("title");
+  } else {
+    resetSortIcons();
+
+    e.currentTarget.classList.remove("fa-sort");
+    e.currentTarget.classList.add("fa-sort-alpha-up");
+    sortAscendingByProperty("title");
+  }
 });
 
 authorSort.addEventListener("click", (e) => {
-  resetSortIcons();
+  // if the authors are currently sorted in ascending order, change the icon and sort by descending order
+  // otherwise, sort the authors in ascending order
+  // unsorted -> ascending order -> descending order
+  if (e.currentTarget.className.includes("fa-sort-alpha-up")) {
+    resetSortIcons();
 
-  e.currentTarget.classList.remove("fa-sort");
-  e.currentTarget.classList.add("fa-sort-alpha-up");
-  sortAscendingByProperty("author");
+    e.currentTarget.classList.remove("fa-sort-alpha-up");
+    e.currentTarget.classList.add("fa-sort-alpha-down");
+    sortDescendingByProperty("author");
+  } else {
+    resetSortIcons();
+
+    e.currentTarget.classList.remove("fa-sort");
+    e.currentTarget.classList.add("fa-sort-alpha-up");
+    sortAscendingByProperty("author");
+  }
 });
 
 pageSort.addEventListener("click", (e) => {
-  resetSortIcons();
+  // if the number of pages are currently sorted in ascending order, change the icon and sort by descending order
+  // otherwise, sort the number of pages in ascending order
+  // unsorted -> ascending order -> descending order
+  if (e.currentTarget.className.includes("fa-sort-numeric-up")) {
+    resetSortIcons();
 
-  e.currentTarget.classList.remove("fa-sort");
-  e.currentTarget.classList.add("fa-sort-numeric-up");
-  sortAscendingByProperty("numPages");
+    e.currentTarget.classList.remove("fa-sort-numeric-up");
+    e.currentTarget.classList.add("fa-sort-numeric-down");
+    sortDescendingByProperty("numPages");
+  } else {
+    resetSortIcons();
+
+    e.currentTarget.classList.remove("fa-sort");
+    e.currentTarget.classList.add("fa-sort-numeric-up");
+    sortAscendingByProperty("numPages");
+  }
 });
 
 displayBooksFromLocalStorage();
