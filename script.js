@@ -5,6 +5,9 @@ let bookNumPages = document.querySelector("#book-pages");
 let bookStatus = document.querySelector("#book-status");
 let form = document.querySelector("#add-book-form");
 const books = document.querySelector("#books");
+const titleSort = document.querySelector("#title-sort");
+const authorSort = document.querySelector("#author-sort");
+const pageSort = document.querySelector("#pages-sort");
 
 // variables
 let library = getLibraryFromLocalStorage();
@@ -184,11 +187,56 @@ function displayBooksFromLocalStorage() {
   }
 }
 
+function sortAscendingByProperty(property) {
+  // let sortedLibrary = JSON.parse(JSON.stringify(library));
+  library.sort((a, b) => (a[property] > b[property] ? 1 : -1));
+
+  books.textContent = "";
+
+  for (book of library) {
+    displayBook(book);
+  }
+
+  addToLocalStorage();
+}
+
+function resetSortIcons() {
+  let sortIcons = document.querySelectorAll(".fas");
+
+  sortIcons.forEach((icon) => {
+    icon.setAttribute("class", "fas fa-sort");
+  });
+}
+
 // event listeners
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   addBookToLibrary();
   clearForm();
+});
+
+titleSort.addEventListener("click", (e) => {
+  resetSortIcons();
+
+  e.currentTarget.classList.remove("fa-sort");
+  e.currentTarget.classList.add("fa-sort-alpha-up");
+  sortAscendingByProperty("title");
+});
+
+authorSort.addEventListener("click", (e) => {
+  resetSortIcons();
+
+  e.currentTarget.classList.remove("fa-sort");
+  e.currentTarget.classList.add("fa-sort-alpha-up");
+  sortAscendingByProperty("author");
+});
+
+pageSort.addEventListener("click", (e) => {
+  resetSortIcons();
+
+  e.currentTarget.classList.remove("fa-sort");
+  e.currentTarget.classList.add("fa-sort-numeric-up");
+  sortAscendingByProperty("numPages");
 });
 
 displayBooksFromLocalStorage();
