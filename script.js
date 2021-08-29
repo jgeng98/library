@@ -151,14 +151,12 @@ function createDeleteButton(book) {
 
   // add an event listener to delete the row on click
   deleteButton.addEventListener("click", (e) => {
-    // deletes the book from the library using the previously found index
+    // deletes the book from the library using the previously found index and updates the local storage library
     library.splice(bookIndex, 1);
+    addToLocalStorage();
     // deletes the book from the display
     books.deleteRow(e.currentTarget.parentElement.parentElement.rowIndex - 1);
   });
-
-  // update the library in the local storage
-  addToLocalStorage();
 
   // return the button
   return deleteButton;
